@@ -1,0 +1,23 @@
+[package]
+name = "async-walk"
+version = "0.1.0"
+authors = ["Ryan Coffman"]
+edition = "2018"
+readme = "README.md"
+license = "MIT"
+description = "A concurrent fs walk library built on top of tokio"
+
+[dependencies]
+tokio = { version = "0.2", features = ["fs", "stream"] }
+futures = "0.3"
+crossbeam-channel = "0.4"
+
+[dev-dependencies]
+criterion = "0.3"
+walkdir = "2"
+tokio = { version = "0.2", features = ["fs", "stream", "macros", "rt-threaded"] }
+tempfile = "3.1"
+
+[[bench]]
+name = "comparison"
+harness = false
