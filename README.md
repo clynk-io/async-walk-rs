@@ -1,3 +1,6 @@
+[![crates.io](https://img.shields.io/crates/v/async-walk.svg)](https://crates.io/crates/async-walk)
+[![docs.rs](https://docs.rs/async-walk/badge.svg)](https://docs.rs/async-walk/)
+
 # async-walk
 
 A concurrent fs walk library built on top of tokio.
