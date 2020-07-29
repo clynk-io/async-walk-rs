@@ -51,7 +51,7 @@ impl Walk {
         root: PathBuf,
         follow_symlinks: bool,
         concurrency_limit: Option<usize>,
-        max_level: Option<u64>,
+        max_depth: Option<u64>,
         filter: Option<Filter>,
     ) -> Self {
         let (tx, rx) = unbounded();
@@ -64,12 +64,12 @@ impl Walk {
             ready_entries: vec![],
             receiver: rx,
             sender: tx,
-            follow_symlinks: follow_symlinks,
+            follow_symlinks,
             counter: Arc::new(AtomicUsize::new(0)),
-            concurrency_limit: concurrency_limit,
-            visited: visited,
-            max_depth: max_level,
-            filter: filter.map(|f| Arc::new(f)),
+            concurrency_limit,
+            visited,
+            max_depth,
+            filter: filter.map(Arc::new),
         }
     }
 }
@@ -299,7 +299,7 @@ impl WalkBuilder {
         self
     }
 
-    pub fn max_depth<'a>(mut self, max_depth: u64) -> Self {
+    pub fn max_depth(mut self, max_depth: u64) -> Self {
         self.max_depth = Some(max_depth);
         self
     }
